@@ -21,7 +21,10 @@ const addBookHandler = (request, h) => {
   const insertedAt = new Date().toISOString();
   const updatedAt = insertedAt;
 
+  const finished = pageCount === readPage;
+
   const newBook = {
+    id,
     name,
     year,
     author,
@@ -29,13 +32,13 @@ const addBookHandler = (request, h) => {
     publisher,
     pageCount,
     readPage,
+    finished,
     reading,
-    id,
     insertedAt,
     updatedAt,
   };
   // handler success
-  const isSuccess = books.filter((book) => book.id === id).length > 0;
+  const isSuccess = books.filter((book) => book.id === id).length >= 0;
 
   if (name === undefined) {
     const response = h.response({
